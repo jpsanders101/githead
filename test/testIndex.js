@@ -31,7 +31,7 @@ describe('.init', function () {
     it('returns a helpful message about "git add" to the command line', function() {
       var consoleSpy = sinon.spy(console, "log");
       index.add();
-      assert(consoleSpy.calleWith("This explain how git add works"));
+      assert(consoleSpy.calledWith("This explains how git add works"));
       console.log.restore();
     });
   });

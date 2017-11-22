@@ -19,6 +19,12 @@ function init () {
   return gitResponse;
 }
 
+function add() {
+  console.log("This explains how git add works");
+  var gitResponse = executeGitCommand();
+  console.log(gitResponse);
+}
+
 function executeGitCommand () {
   var gitCommand = childProcess.spawnSync('git', getGitHeadArgs());
   var gitResponse = gitCommand.stdout.toString() || gitCommand.stderr.toString();
@@ -26,5 +32,6 @@ function executeGitCommand () {
 }
 
 module.exports = {
-  init : init
+  init : init,
+  add : add
 };
