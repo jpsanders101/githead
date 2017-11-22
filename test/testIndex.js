@@ -26,4 +26,13 @@ describe('.init', function () {
 
     sinon.assert.match(index.init(), "git init success string");
   })
+
+  describe('.add', function() {
+    it('returns a helpful message about "git add" to the command line', function() {
+      var consoleSpy = sinon.spy(console, "log");
+      index.add();
+      assert(consoleSpy.calleWith("This explain how git add works"));
+      console.log.restore();
+    });
+  });
 });
