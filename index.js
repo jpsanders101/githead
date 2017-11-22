@@ -1,4 +1,5 @@
 var childProcess = require('child_process');
+var inquirer = require('inquirer');
 
 console.log("You launched githead!");
 
@@ -19,6 +20,25 @@ function init () {
   return gitResponse;
 }
 
+function pull () {
+  console.log("Helpful message about how git pull works");
+  inquirer.prompt({
+    type: 'list',
+    name: 'pull_choices',
+    message: 'Are you sure this is what you want to do?',
+    choices: ['git pull', 'cancel action']
+    }
+  ).then((answers)=>{
+    if(answers.pull_choices === "git pull") {
+    var gitResponse = executeGitCommand();
+    console.log(gitResponse);
+    return gitResponse;
+  } else {
+    process.exit();
+    }
+  });
+}
+
 function executeGitCommand () {
   var gitCommand = childProcess.spawnSync('git', getGitHeadArgs());
   var gitResponse = gitCommand.stdout.toString() || gitCommand.stderr.toString();
@@ -26,5 +46,6 @@ function executeGitCommand () {
 }
 
 module.exports = {
-  init : init
+  init : init,
+  pull : pull
 };

@@ -27,3 +27,13 @@ describe('.init', function () {
     sinon.assert.match(index.init(), "git init success string");
   })
 });
+
+
+describe('.pull', function () {
+  it('returns a helful message about "git pull" to the command line', function () {
+    var consoleSpy = sinon.spy(console, "log");
+    index.pull();
+    assert(consoleSpy.calledWith("Helpful message about how git pull works"));
+    console.log.restore();
+  });
+});
