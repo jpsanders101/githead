@@ -15,9 +15,7 @@ function getGitHeadArgs () {
 
 function init () {
   console.log("Helpful message about how git works");
-  var gitResponse = executeGitCommand();
-  console.log(gitResponse);
-  return gitResponse;
+  executeGitCommand();
 }
 
 function pull () {
@@ -47,10 +45,10 @@ function pull () {
 }
 
 function executeGitCommand () {
-  // var gitCommand = childProcess.spawnSync('git', getGitHeadArgs());
-  // var gitResponse = gitCommand.stdout.toString() || gitCommand.stderr.toString();
-  // return gitResponse;
-  return "Uncomment above when your sure stub works";
+  var gitCommand = childProcess.spawnSync('git', getGitHeadArgs());
+  var gitResponse = gitCommand.stdout.toString() || gitCommand.stderr.toString();
+  console.log(gitResponse);
+  // return "Uncomment above when your sure stub works";
 }
 
 module.exports = {
