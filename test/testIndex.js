@@ -1,7 +1,10 @@
 var assert = require('assert');
-var index = require('../index.js');
-var proxyquire = require('proxyquire');
 var sinon = require('sinon');
+var proxyquire = require('proxyquire');
+
+sinon.stub(console, "log");
+var index = require('../index.js');
+console.log.restore();
 
 describe('.init', function () {
   it('returns a helpful message about "git init" to the command line', function () {
