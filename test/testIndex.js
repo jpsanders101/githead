@@ -30,10 +30,27 @@ describe('.init', function () {
 
 
 describe('.pull', function () {
-  it('returns a helful message about "git pull" to the command line', function () {
+
+  it('returns a helpful message about "git pull" to the command line', function () {
     var consoleSpy = sinon.spy(console, "log");
     index.pull();
     assert(consoleSpy.calledWith("Helpful message about how git pull works"));
     console.log.restore();
+  });
+
+  it('asks a question', function () {
+    var inquirerStub = sinon.stub(index.inquirer, "prompt").returns(Promise.resolve({pull_choices: 'test answer'}));
+    index.pull();
+    assert(inquirerStub.calledOnce);
+  });
+
+  it('when user selects "git pull", the command is executed', function () {
+    var executerStub = sinon.stub(index, "executeGitCommand").returns("git command stdout string");
+    var inquirerStub = sinon.stub(index.inquirer, "prompt").returns(Promise.resolve({pull_choices: 'git pull'}));
+
+    assert(index.pull() === "git command stdout string", "worked!");
+  });
+  it('when user selects "cancel action", the program exits', function () {
+
   });
 });
