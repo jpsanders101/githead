@@ -1,0 +1,5 @@
+echo '{ "presets": ["es2015"] }' > .babelrc
+
+{
+  "plugins": ["syntax-dynamic-import"]
+}

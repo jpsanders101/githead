@@ -1,7 +1,10 @@
+// import run, { UP, DOWN, ENTER } from 'inquirer-test';
 var assert = require('assert');
 var index = require('../index.js');
 var proxyquire = require('proxyquire');
 var sinon = require('sinon');
+var inquirer_test = require('inquirer-test');
+console.log(inquirer_test);
 
 describe('.init', function () {
   it('returns a helpful message about "git init" to the command line', function () {
@@ -25,7 +28,7 @@ describe('.init', function () {
     });
 
     sinon.assert.match(index.init(), "git init success string");
-  })
+  });
 });
 
 
@@ -35,5 +38,14 @@ describe('.pull', function () {
     index.pull();
     assert(consoleSpy.calledWith("Helpful message about how git pull works"));
     console.log.restore();
+  });
+});
+
+describe('.pull with inquirer-test', function () {
+  it('takes a prompt and returns the relivant outcome', async function() {
+    const indexPath = __dirname + '/index.js';
+    console.log(run.toString());
+    const result = await (indexPath, [inquirer_test.DOWN, inquirer_test.ENTER]);
+    assert(index.pull().result.equal('cancel'));
   });
 });

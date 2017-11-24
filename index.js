@@ -1,5 +1,6 @@
 var childProcess = require('child_process');
 var inquirer = require('inquirer');
+const chalk = require('chalk');
 
 console.log("You launched githead!");
 
@@ -16,7 +17,7 @@ function getGitHeadArgs () {
 function init () {
   console.log("Helpful message about how git works");
   var gitResponse = executeGitCommand();
-  console.log(gitResponse);
+  console.log(chalk.green(gitResponse));
   return gitResponse;
 }
 
@@ -34,6 +35,7 @@ function pull () {
     console.log(gitResponse);
     return gitResponse;
   } else {
+    console.log("cancel");
     process.exit();
     }
   });
