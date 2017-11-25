@@ -1,3 +1,5 @@
+
+
 var childProcess = require('child_process');
 var inquirer = require('inquirer');
 
@@ -15,13 +17,13 @@ function getGitHeadArgs () {
 
 function init () {
   console.log("Helpful message about how git works");
-  executeGitCommand();
+  exports.wrapper.executeGitCommand(getGitHeadArgs());
 }
 
 function pull () {
   console.log("Helpful message about how git pull works");
 
-  var promptPromise = inquirer.prompt({
+  var promptPromise = exports.inquirer.prompt({
       type: 'list',
       name: 'pull_choices',
       message: 'Are you sure this is what you want to do?',
@@ -31,29 +33,33 @@ function pull () {
 
   var promptResponse = function (answers) {
     if(answers.pull_choices === "git pull") {
-      var gitResponse = executeGitCommand();
-      console.log(gitResponse);
-      return gitResponse;
+      exports.executeGitCommand(getGitHeadArgs());
     } else {
-      console.log(answers)
-      console.log(promptPromise);
       process.exit();
     }
-  }
+  };
 
   promptPromise.then(promptResponse);
 }
 
-function executeGitCommand () {
-  var gitCommand = childProcess.spawnSync('git', getGitHeadArgs());
-  var gitResponse = gitCommand.stdout.toString() || gitCommand.stderr.toString();
-  console.log(gitResponse);
-  // return "Uncomment above when your sure stub works";
+var wrapper = {
+  executeGitCommand: function(gitHeadArgs) {
+    var gitCommand = childProcess.spawnSync('git', gitHeadArgs);
+    var gitResponse = gitCommand.stdout.toString() || gitCommand.stderr.toString();
+    console.log(gitResponse);
+  }
 }
 
-module.exports = {
+function executeGitCommand (gitHeadArgs) {
+  var gitCommand = childProcess.spawnSync('git', gitHeadArgs);
+  var gitResponse = gitCommand.stdout.toString() || gitCommand.stderr.toString();
+  console.log(gitResponse);
+}
+
+var exports = module.exports = {
   init : init,
   pull : pull,
   inquirer: inquirer,
+  wrapper: wrapper,
   executeGitCommand: executeGitCommand
 };
