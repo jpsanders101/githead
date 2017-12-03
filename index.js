@@ -1,14 +1,25 @@
-
-
 var childProcess = require('child_process');
 var inquirer = require('inquirer');
 
 console.log("You launched githead!");
 
 if (getGitHeadArgs().length) {
-  eval(getGitHeadArgs()[0])();
+  methodSelector(getGitHeadArgs()[0]);
+  // eval(getGitHeadArgs()[0])();
 } else {
   console.log("You didn't tell githead to do anything!");
+}
+
+function methodSelector(githeadArg) {
+  var selection = {
+    "init": init,
+    "pull": pull,
+    "status": status,
+    default: function () {
+      console.log("Erm..you didn't tell githead to do anything!")
+    }
+  };
+  return (selection[githeadArg] || selection['default'])();
 }
 
 function getGitHeadArgs () {
@@ -18,6 +29,11 @@ function getGitHeadArgs () {
 function init () {
   console.log("Helpful message about how git works");
   exports.wrapper.executeGitCommand(getGitHeadArgs());
+}
+
+function status () {
+  console.log("Launching git status...");
+  executeGitCommand(getGitHeadArgs());
 }
 
 function pull () {
