@@ -49,7 +49,7 @@ function pull () {
 
   var promptResponse = function (answers) {
     if(answers.pull_choices === "git pull") {
-      exports.executeGitCommand(getGitHeadArgs());
+      executeGitCommand(getGitHeadArgs());
     } else {
       process.exit();
     }
