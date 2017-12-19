@@ -22,7 +22,7 @@ function methodSelector(githeadArg) {
 function init(printerUnit = printer) {
   printerUnit.print("Your directory is now initialised with git. That means everything in this directory and any sub--directories is being tracked.\nHints:\n> Add a '.gitignore' file to stop certain files from being tracked\n> Add a remote repository on GitHub to share the work in this directory with others.")
   var gitResponse = executeGitCommand();
-  // console.log(gitResponse);
+  printerUnit.print(gitResponse);
   return gitResponse;
 }
 

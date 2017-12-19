@@ -41,6 +41,25 @@ describe('#welcome', () => {
        });
        assert.equal(index.init(printerMock), "git init success string");
      });
+     it('prints "git init" success string', () => {
+       var printerSpy = sinon.spy();
+       var printerMock = {
+         print: printerSpy
+       };
+        var index = proxyquire('../index.js', {
+          'child_process': {
+            spawnSync: function(command, args) {
+              return {
+                stdout: {
+                  toString: () => "git init success string"
+                }
+              };
+            }
+          }
+        });
+        index.init(printerMock)
+        assert(printerSpy.calledWith("git init success string"));
+     });
   });
 
 // describe('.init', function() {
