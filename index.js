@@ -8,7 +8,6 @@ function methodSelector(githeadArg) {
   var selection = {
     "init": init,
     "pull": pull,
-    "status": status,
     default: function () {
       console.log("Erm..you didn't tell githead to do anything!");
     }
@@ -23,10 +22,20 @@ function init() {
   return gitResponse;
 }
 
+function pull() {
+  console.log("You're about to pull a repo down from a remote repository and merge it with the one you're in currently");
+  var gitResponse = executeGitCommand();
+  console.log(gitResponse);
+  return gitResponse;
+}
+
 function helpme() {
   console.log("usage: githead [init] [merge] [pull] [add]")
 }
 
+function getGitHeadArgs () {
+  return process.argv.slice(2, process.argv.length);
+}
 
 function executeGitCommand() {
   var gitCommand = childProcess.spawnSync('git', getGitHeadArgs());
