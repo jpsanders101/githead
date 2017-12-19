@@ -43,11 +43,24 @@ describe('Index', () => {
       assert(printerSpy.calledWith("git init success string"));
     });
   });
-  
+
   describe('#helpme', () => {
     it('prints helpful message about githead usage', () => {
       index.helpme(printerMock);
       assert(printerSpy.calledWith("usage: githead [init] [merge] [pull] [add]"));
     });
+  });
+
+  describe('#methodSelector', ()=> {
+    it('prints a helpful message when no arguments are passed to githead', () => {
+      index.methodSelector(undefined, printerMock);
+      assert(printerSpy.calledWith("Erm...you didn't tell githead to do anything!"));
+    });
+    // below not passing - index is not called from the interface so isn't stubbed
+    // it('calls a method corresponding to the string passed in', () => {
+    //   var indexSpy = sinon.stub(index, 'init');
+    //   index.methodSelector('init');
+    //   assert(indexSpy.calledOnce);
+    // });
   });
 });

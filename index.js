@@ -8,12 +8,12 @@ welcome();
 
 methodSelector(getGitHeadArgs()[0]);
 
-function methodSelector(githeadArg) {
+function methodSelector(githeadArg, printerUnit = printer) {
   var selection = {
     "init": init,
     "pull": pull,
     default: function () {
-      console.log("Erm..you didn't tell githead to do anything!");
+      printerUnit.print("Erm...you didn't tell githead to do anything!")
     }
   };
   return (selection[githeadArg] || selection['default'])();
@@ -47,8 +47,11 @@ function executeGitCommand() {
   return gitResponse;
 }
 
-module.exports = {
+var indexInterface = {
   init: init,
   welcome: welcome,
-  helpme: helpme
+  helpme: helpme,
+  methodSelector: methodSelector
 };
+
+module.exports = indexInterface;
