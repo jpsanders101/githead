@@ -1,6 +1,10 @@
 var childProcess = require('child_process');
+var printer = require('./printer');
 
-console.log("You launched githead!");
+function welcome (printerUnit = printer) {
+  printerUnit.print("You launched githead!");
+}
+welcome();
 
 methodSelector(getGitHeadArgs()[0]);
 
@@ -44,5 +48,6 @@ function executeGitCommand() {
 }
 
 module.exports = {
-  init: init
+  init: init,
+  welcome: welcome
 };
