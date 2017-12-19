@@ -22,8 +22,8 @@ describe('Index', () => {
       }
     });
   });
-  describe('#welcome', () => {
 
+  describe('#welcome', () => {
     it('prints a welcome message', () => {
       index.welcome(printerMock);
       assert(printerSpy.calledWith("You launched githead!"));
@@ -43,6 +43,7 @@ describe('Index', () => {
       assert(printerSpy.calledWith("git init success string"));
     });
   });
+  
   describe('#helpme', () => {
     it('prints helpful message about githead usage', () => {
       index.helpme(printerMock);
@@ -50,14 +51,3 @@ describe('Index', () => {
     });
   });
 });
-
-
-//   describe('.helpme', function() {
-//     it('returns some helpful information', function() {
-//       var consoleSpy = sinon.spy(console, "log");
-//       index.helpme();
-//       assert(consoleSpy.calledWith("usage: githead [init] [merge] [pull] [add]"))
-//       console.log.restore();
-//     })
-//   })
-// });
