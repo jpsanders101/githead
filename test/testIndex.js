@@ -5,10 +5,10 @@ var sinon = require('sinon');
 
 describe('#welcome', () => {
     it('prints a welcome message', () => {
+      var printerSpy = sinon.spy();
       var printerMock = {
-        print: (welcomeString) => { return welcomeString; }
+        print: printerSpy
       };
-      var printerSpy = sinon.spy(printerMock, "print");
       index.welcome(printerMock);
       assert(printerSpy.calledWith("You launched githead!"));
     });
