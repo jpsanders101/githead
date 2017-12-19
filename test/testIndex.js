@@ -39,12 +39,17 @@ describe('Index', () => {
       assert.equal(index.init(printerMock), "git init success string");
     });
     it('prints "git init" success string', () => {
-      index.init(printerMock)
+      index.init(printerMock);
       assert(printerSpy.calledWith("git init success string"));
     });
   });
-
-})
+  describe('#helpme', () => {
+    it('prints helpful message about githead usage', () => {
+      index.helpme(printerMock);
+      assert(printerSpy.calledWith("usage: githead [init] [merge] [pull] [add]"));
+    });
+  });
+});
 
 
 //   describe('.helpme', function() {

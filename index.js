@@ -33,8 +33,8 @@ function pull() {
   return gitResponse;
 }
 
-function helpme() {
-  console.log("usage: githead [init] [merge] [pull] [add]")
+function helpme(printerUnit = printer) {
+  printerUnit.print("usage: githead [init] [merge] [pull] [add]");
 }
 
 function getGitHeadArgs () {
@@ -49,5 +49,6 @@ function executeGitCommand() {
 
 module.exports = {
   init: init,
-  welcome: welcome
+  welcome: welcome,
+  helpme: helpme
 };
