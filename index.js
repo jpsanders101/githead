@@ -26,10 +26,10 @@ function init(printerUnit = printer) {
   return gitResponse;
 }
 
-function pull() {
-  console.log("You're about to pull a repo down from a remote repository and merge it with the one you're in currently");
+function pull(printerUnit = printer) {
+  printerUnit.print("You're about to pull a repo down from a remote repository and merge it with the one you're in currently")
   var gitResponse = executeGitCommand();
-  console.log(gitResponse);
+  printerUnit.print(gitResponse);
   return gitResponse;
 }
 
