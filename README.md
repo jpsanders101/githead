@@ -48,11 +48,18 @@ Hints:
 > Add a remote repository on GitHub to share the work in this directory with others.
 ```
 
-## Project Overview
+## Project Review notes
 This was a challenging group project we worked on over four days. It introduced us to using Node.js and approaches to building a command line tool.
 
+More functionality is currently in other branches but is incomplete `pull2` contains an implementation of `#pull` using inquirer, for example.
+
+### Printer Unit
+Due to the dependency on the console object, our original test suite was highly fragile. I have wrapped `console.log` within a separate unit called `printer` and injected the dependency into index to make it easier to test. This will also make extending the functionality of the `printer` unit easier in the future to e.g. make it print different colours to the console.
+
+### Executing Git commands
 We arrived at a solution for wrapping around git functions by using child processes. Arguments passed to the `$ githead` command are then passed to a synchronous child process within the program which executes the git command. This solution means that any flags that would be passed to a git command can also be handled by githead.
 
+### Testing Strategy
 Our strategy for testing was to use unit tests to test all code paths, but to stub the console and the 'inquirer' framework, then use a feature testing to ensure inquirer behaves as expected. Key difficulties on this project were around effective testing. The frequent stubbing and restoring of the console object made the tests very brittle; when one test failed, the error message for that test, as well as the result for any subsequent test, was not shown because the console is only restored after each test passes. 'inquirer' also proved very difficult to test. As such, this project is a work-in-progress, with incomplete features on several branches to allow us (and any willing pull-requesters!) to continue working on it.
 
 
@@ -60,7 +67,6 @@ Our strategy for testing was to use unit tests to test all code paths, but to st
 * git helpme (provides githead usage instructions)
 * git init
 * git pull
-* git merge
 
 ## Technologies Used
 * Node.js
