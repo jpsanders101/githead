@@ -13,21 +13,21 @@ function methodSelector(githeadArg, printerUnit = printer) {
     "init": init,
     "pull": pull,
     default: function () {
-      printerUnit.print("Erm...you didn't tell githead to do anything!")
+      printerUnit.print("Erm...you didn't tell githead to do anything!");
     }
   };
   return (selection[githeadArg] || selection['default'])();
 }
 
 function init(printerUnit = printer) {
-  printerUnit.print("Your directory is now initialised with git. That means everything in this directory and any sub--directories is being tracked.\nHints:\n> Add a '.gitignore' file to stop certain files from being tracked\n> Add a remote repository on GitHub to share the work in this directory with others.")
+  printerUnit.print("Your directory is now initialised with git. That means everything in this directory and any sub--directories is being tracked.\nHints:\n> Add a '.gitignore' file to stop certain files from being tracked\n> Add a remote repository on GitHub to share the work in this directory with others.");
   var gitResponse = executeGitCommand();
   printerUnit.print(gitResponse);
   return gitResponse;
 }
 
 function pull(printerUnit = printer) {
-  printerUnit.print("You're about to pull a repo down from a remote repository and merge it with the one you're in currently")
+  printerUnit.print("You're about to pull a repo down from a remote repository and merge it with the one you're in currently");
   var gitResponse = executeGitCommand();
   printerUnit.print(gitResponse);
   return gitResponse;
