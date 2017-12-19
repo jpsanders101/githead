@@ -14,6 +14,17 @@ describe('#welcome', () => {
     });
   });
 
+  describe('#init', () => {
+    it('prints a helpful message about "git init"', () => {
+      var printerSpy = sinon.spy();
+      var printerMock = {
+        print: printerSpy
+      };
+      index.init(printerMock);
+      assert(printerSpy.calledWith("Your directory is now initialised with git. That means everything in this directory and any sub--directories is being tracked.\nHints:\n> Add a '.gitignore' file to stop certain files from being tracked\n> Add a remote repository on GitHub to share the work in this directory with others."));
+    });
+  });
+
 // describe('.init', function() {
 //   it('returns a helpful message about "git init" to the command line', function() {
 //     var consoleSpy = sinon.spy(console, "log");
